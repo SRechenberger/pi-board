@@ -1,0 +1,8 @@
+python-language-server[all]
+
+flask
+flask-bootstrap
+flask-sqlalchemy
+flask-migrate
+
+python-dotenv
