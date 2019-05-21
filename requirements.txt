@@ -1,8 +1,10 @@
 python-language-server[all]
 
 flask
+flask-wtf
 flask-bootstrap
 flask-sqlalchemy
 flask-migrate
+flask-login
 
 python-dotenv

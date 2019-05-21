@@ -1,0 +1,15 @@
+{% extends 'base.html.j2' %}
+
+{% block app_content %}
+<div class="row">
+  <div class="col-md-4">
+    {% if user.displayed_name %}
+    <h2>{{ user.displayed_name }}</h2>
+    <p>{{ user.handle }}</p>
+    {% else %}
+    <h2>{{ user.handle }}</h2>
+    {% endif %}
+    <p>{{ user.email }}</p>
+  </div>
+</div>
+{% endblock app_content %}
