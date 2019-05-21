@@ -1,7 +1,23 @@
 {% extends "bootstrap/base.html" %}
 
+{% block navbar %}
+<div class="container">
+  <h3>PiBoard</h3>
+</div>
+{% endblock navbar %}
+
+{% block styles %}
+  {{ super() | safe }}
+  <link href="static/styles.css" rel="stylesheet">
+{% endblock styles %}
+
 {% block title %}
 {{ title }}
 {% endblock title %}
 
-{% block content %}{% endblock content %}
+{% block content %}
+<div class="container">
+  {% block app_content %}
+  {% endblock app_content %}
+</div>
+{% endblock content %}
