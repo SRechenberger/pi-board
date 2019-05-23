@@ -6,5 +6,6 @@ flask-bootstrap
 flask-sqlalchemy
 flask-migrate
 flask-login
+flask-uploads
 
 python-dotenv

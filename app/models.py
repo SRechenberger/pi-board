@@ -13,8 +13,10 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     handle = db.Column(db.String(32), index=True, unique=True)
     displayed_name = db.Column(db.String(64))
-    email = db.Column(db.String(120), index=True, unique=True)
+    email = db.Column(db.String(128), index=True, unique=True)
+    status_message = db.Column(db.String(128))
     password_hash = db.Column(db.String(128))
+    profile_pic = db.Column(db.String(128), unique=True)
     posts = db.relationship(
         'Post',
         backref='author',

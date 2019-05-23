@@ -1,3 +1,13 @@
 * {
   font-family: inconsolata, monospace;
 }
+
+img {
+  max-width: 100%;
+  max-height: auto;
+}
+
+.profile_pic {
+  height: 100%;
+  width: 100%;
+}

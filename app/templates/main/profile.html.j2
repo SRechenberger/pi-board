@@ -2,14 +2,33 @@
 
 {% block app_content %}
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-3">
+    {% if user.profile_pic %}
+    <div class="profile_pic">
+      <img src="{{ profile_pic }}">
+    </div>
+    {% endif %}
     {% if user.displayed_name %}
     <h2>{{ user.displayed_name }}</h2>
     <p>{{ user.handle }}</p>
     {% else %}
     <h2>{{ user.handle }}</h2>
     {% endif %}
+    <hr>
     <p>{{ user.email }}</p>
+    {% if user.status_message %}
+    <p>
+      <b>Status:</b><br>
+      {{ user.status_message }}
+    </p>
+    {% endif %}
+    {% if user.handle == current_user.handle %}
+    <a href="{{ url_for('main.edit_profile', handle=user.handle) }}">Edit Profile</a>
+    {% endif %}
+  </div>
+  <div class="col-md">
+    {% block profile_content %}
+    {% endblock profile_content %}
   </div>
 </div>
 {% endblock app_content %}

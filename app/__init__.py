@@ -1,12 +1,21 @@
+import os
+
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_uploads import configure_uploads, UploadSet, IMAGES
 
 from config import Config
 
 
+images = UploadSet(
+    'images',
+    IMAGES,
+    default_dest=lambda app:
+        os.path.join(app.instance_path, 'profile_pics')
+)
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
@@ -17,10 +26,12 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
+
     bootstrap.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
+    configure_uploads(app, (images,))
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
