@@ -4,9 +4,9 @@ from flask import render_template, redirect, request, flash, url_for, current_ap
 from flask_login import login_required, current_user
 
 from app import db, images
-from app.models import User
+from app.models import User, Post
 from app.main import bp
-from app.main.forms import EditProfileForm
+from app.main.forms import EditProfileForm, PostForm
 
 from werkzeug.utils import secure_filename
 
@@ -15,17 +15,64 @@ from werkzeug.utils import secure_filename
 def index():
     return render_template('main/index.html.j2', title='PiBoard')
 
-@bp.route('/profile/<handle>')
+@bp.route('/post/<handle>/<post_id>', methods=['GET', 'POST'])
+@login_required
+def post(handle, post_id):
+    post = Post.query.filter_by(id=post_id).first_or_404()
+    user = User.query.filter_by(handle=handle).first_or_404()
+
+    comment_form = PostForm()
+    if comment_form.validate_on_submit():
+        comment = Post(
+            body=comment_form.body.data,
+            author=current_user,
+            comment_to=post
+        )
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(
+            url_for(
+                'main.post',
+                handle=handle,
+                post_id=post_id
+            )
+        )
+
+    return render_template(
+        'main/post.html.j2',
+        user=user,
+        post=post,
+        comment_form=comment_form
+    )
+
+
+@bp.route('/profile/<handle>', methods=['GET', 'POST'])
 @login_required
 def profile(handle):
     user = User.query.filter_by(handle=handle).first_or_404()
+    posts = user.posts.order_by(Post.timestamp.desc()).all()
+
+    post_form = PostForm()
+
+    if post_form.validate_on_submit():
+        post = Post(
+            body=post_form.body.data,
+            author=current_user
+        )
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been posted')
+        return redirect(url_for('main.profile', handle=handle))
+
     return render_template(
         'main/user_posts.html.j2',
         title=f'User {user.handle}',
         user=user,
-        profile_pic=images.url(user.profile_pic) \
-            if user.profile_pic else None
+        posts=posts,
+        post_form=post_form,
+        owner=(current_user.handle == handle)
     )
+
 
 @bp.route('/edit_profile/<handle>', methods=['GET', 'POST'])
 @login_required
@@ -81,7 +128,5 @@ def edit_profile(handle):
         'main/edit_profile.html.j2',
         title='Edit Profile',
         user=user,
-        form=form,
-        profile_pic=images.url(user.profile_pic) \
-            if user.profile_pic else None
+        form=form
     )

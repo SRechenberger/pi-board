@@ -1,5 +1,20 @@
 {% extends "main/profile.html.j2" %}
 
 {% block profile_content %}
-Nothing here yet...
+  {% if owner %}
+  <div class="row">
+    <div class="col-md-9">
+      {{ wtf.quick_form(post_form) }}
+    </div>
+  </div>
+  {% endif %}
+  <div class="row">
+    <div class="col-md-9">
+      {% for post in posts %}
+        {% if not post.parent_id %}
+        <p>{% include "main/_post.html.j2" %}</p>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 {% endblock profile_content %}

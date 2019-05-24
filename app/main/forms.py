@@ -22,3 +22,11 @@ class EditProfileForm(FlaskForm):
         validators=[Length(0,128)]
     )
     submit = SubmitField('Save')
+
+
+class PostForm(FlaskForm):
+    body = TextAreaField(
+        'Post Something',
+        validators=[Length(1,512)]
+    )
+    submit = SubmitField('Post!')

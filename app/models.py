@@ -43,12 +43,14 @@ class Post(db.Model):
     body = db.Column(db.String(512))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
-    comment = db.relationship(
+    parent_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    comments = db.relationship(
         'Post',
-        remote_side=[id],
-        backref='comment_to'
+        backref=db.backref(
+            'comment_to',
+            remote_side=id
+        )
     )
 
     def __repr__(self):
-        return f'<Post {user_id}@{timestamp}>'
+        return f'<Post {self.user_id}@{self.timestamp}>'
