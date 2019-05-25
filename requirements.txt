@@ -7,5 +7,7 @@ flask-sqlalchemy
 flask-migrate
 flask-login
 flask-uploads
+flask-babel
+flask-moment
 
 python-dotenv

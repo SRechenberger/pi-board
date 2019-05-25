@@ -1,7 +1,9 @@
 import os
+from datetime import datetime
 
-from flask import render_template, redirect, request, flash, url_for, current_app
+from flask import render_template, redirect, request, flash, url_for, current_app, g
 from flask_login import login_required, current_user
+from flask_babel import get_locale
 
 from app import db, images
 from app.models import User, Post
@@ -10,10 +12,58 @@ from app.main.forms import EditProfileForm, PostForm
 
 from werkzeug.utils import secure_filename
 
+@bp.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
+    g.locale = str(get_locale())
+
 @bp.route('/')
 @bp.route('/index')
 def index():
     return render_template('main/index.html.j2', title='PiBoard')
+
+@bp.route('/post/<post_id>', methods=['GET', 'POST'])
+@login_required
+def edit_post(post_id):
+    post = Post.query.filter_by(id=post_id).first_or_404()
+    user = post.author
+
+    if post.author.handle != current_user.handle:
+        flash('You cannot edit other users posts.')
+        return redirect(
+            url_for(
+                'main.post',
+                handle=post.author.handle,
+                post_id=post.id
+            )
+        )
+
+    form = PostForm()
+    if form.validate_on_submit():
+        post.body = form.body.data
+        post.edited = datetime.utcnow()
+        db.session.commit()
+        flash('Your post has been edited.')
+        return redirect(
+            url_for(
+                'main.post',
+                handle=post.author.handle,
+                post_id=post.id
+            )
+        )
+    elif request.method == 'GET':
+        form.body.data = post.body
+
+    return render_template(
+        'main/post.html.j2',
+        title='Edit Post',
+        comment_form=form,
+        user=user,
+        post=post
+    )
+
 
 @bp.route('/post/<handle>/<post_id>', methods=['GET', 'POST'])
 @login_required
@@ -42,6 +92,7 @@ def post(handle, post_id):
         'main/post.html.j2',
         user=user,
         post=post,
+        title=f'Answer {user.displayed_name or user.handle}',
         comment_form=comment_form
     )
 

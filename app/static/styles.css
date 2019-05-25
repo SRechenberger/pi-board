@@ -19,6 +19,10 @@ img {
   max-width: auto;
 }
 
+#body.form-control {
+  height: 20em;
+  resize: none;
+}
 
 .post {
   border-style: solid;

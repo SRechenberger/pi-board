@@ -46,3 +46,9 @@ Welcome to PiBoard
   {% endblock app_content %}
 </div>
 {% endblock content %}
+
+{% block scripts %}
+  {{ super() | safe }}
+  {{ moment.include_moment() }}
+  {{ moment.lang(g.locale) }}
+{% endblock scripts %}

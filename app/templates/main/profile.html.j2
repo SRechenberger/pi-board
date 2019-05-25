@@ -16,6 +16,11 @@
     {% endif %}
     <hr>
     <p>{{ user.email }}</p>
+    {% if user.last_seen %}
+    <p>
+      <b>Last seen</b> {{ moment(user.last_seen).fromNow() }}
+    </p>
+    {% endif %}
     {% if user.status_message %}
     <p>
       <b>Status:</b><br>

@@ -16,7 +16,11 @@
           {% endif %}
         </div>
         <div class="col-md-6" align="right">
-          {{ post.timestamp }}
+          {% if post.edited %}
+          Edited: {{ moment(post.edited).fromNow() }}
+          {% else %}
+          {{ moment(post.timestamp).fromNow() }}
+          {% endif %}
         </div>
       </div>
       <div class="row">
@@ -31,9 +35,14 @@
         <a href="{{ url_for('main.post', handle=post.author.handle, post_id=post.id) }}">
           Answer
         </a>
-        {% if post.comment_to %}
+        {% if post.comment_to and not top_level_visible %}
         <a href="{{ url_for('main.post', handle=post.comment_to.author.handle, post_id=post.comment_to.id)}}">
-          Back to parent post
+          Parent
+        </a>
+        {% endif %}
+        {% if post.author.handle == current_user.handle %}
+        <a href="{{ url_for('main.edit_post', post_id=post.id) }}">
+          Edit
         </a>
         {% endif %}
       </div>

@@ -17,6 +17,7 @@ class User(UserMixin, db.Model):
     status_message = db.Column(db.String(128))
     password_hash = db.Column(db.String(128))
     profile_pic = db.Column(db.String(128), unique=True)
+    last_seen = db.Column(db.DateTime, index=True)
     posts = db.relationship(
         'Post',
         backref='author',
@@ -40,8 +41,9 @@ post_tree = db.Table(
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(512))
+    body = db.Column(db.String())
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    edited = db.Column(db.DateTime, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     parent_id = db.Column(db.Integer, db.ForeignKey('post.id'))
     comments = db.relationship(

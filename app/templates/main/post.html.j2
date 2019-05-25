@@ -1,10 +1,16 @@
 {% extends 'main/profile.html.j2' %}
 
 {% block profile_content %}
-  {% include 'main/_post.html.j2' %}
   <div class="row">
     <div class="col-md-12">
       {{ wtf.quick_form(comment_form) }}
     </div>
   </div>
+  {% with top_level_visible = not post.comment_to %}
+  <div class="row">
+    <div class="col-md-12">
+      <p>{% include 'main/_post.html.j2' %}</p>
+    </div>
+  </div>
+  {% endwith %}
 {% endblock profile_content %}

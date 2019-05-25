@@ -3,18 +3,20 @@
 {% block profile_content %}
   {% if owner %}
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
       {{ wtf.quick_form(post_form) }}
     </div>
   </div>
   {% endif %}
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
+      {% with top_level_visible = True %}
       {% for post in posts %}
         {% if not post.parent_id %}
         <p>{% include "main/_post.html.j2" %}</p>
         {% endif %}
       {% endfor %}
+      {% endwith %}
     </div>
   </div>
 {% endblock profile_content %}
