@@ -11,6 +11,7 @@
       {% for post in posts %}
         {% if not post.parent_id %}
         <p>{% include "main/_post.html.j2" %}</p>
+        <hr style="margin-bottom: 2em">
         {% endif %}
       {% endfor %}
       {% endwith %}

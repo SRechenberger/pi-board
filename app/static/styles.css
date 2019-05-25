@@ -25,6 +25,7 @@ hr {
 .avatar_pic img {
   max-height: auto;
   max-width: 4em;
+  margin-left: -10px;
 }
 
 #body.form-control {
@@ -41,18 +42,17 @@ hr {
   border-color: silver;
 
   border-right-style: solid;
-  border-right-color: transparent; 
+  border-right-color: transparent;
   border-width: thin;
   width: 100%;
   padding-right: 1em;
   background-color: white;
+  margin-bottom: -1em !important;
+  margin-top: 1em;
 }
 
 .post > div {
+  /* padding-top: 0em; */
   margin-left: 0.1em;
   padding-left: 0.1em;
-}
-
-.answer-row {
-  margin-bottom: -1em !important;
 }
