@@ -15,17 +15,13 @@
 
 hr {
   margin: 3px;
-  width: 100%;
-}
-
-.avatar_pic {
-  margin: 0;
+  /* width: 100%; */
 }
 
 .avatar_pic img {
   max-height: auto;
-  max-width: 4em;
-  margin-left: -10px;
+  max-width: 100%;
+  /* margin-left: -10px; */
 }
 
 #body.form-control {
@@ -34,27 +30,33 @@ hr {
 }
 
 .post {
+  /*
   border-top-style: solid;
   border-top-left-radius: 3px;
-/*  border-bottom-style: solid;
-  border-bottom-left-radius: 3px; */
-  border-left-style: solid;
+  border-bottom-style: solid;
+  border-bottom-left-radius: 3px;
   border-color: silver;
-
+  border-width: thin;
+*/
+  border-left-style: dotted;
+  border-left-color: silver;
+  border-width: thin;
   border-right-style: solid;
   border-right-color: transparent;
-  border-width: thin;
+  border-top-style: solid;
+
+
   width: 100%;
   padding-right: 1em;
   background-color: white;
-  margin-bottom: -1em !important;
+  margin-bottom: -10px !important;
   margin-top: 1em;
 }
 
 .post > div {
   /* padding-top: 0em; */
   margin-left: 0.1em;
-  padding-left: 0.1em;
+  padding-left: 1em;
 }
 
 #post-separator {
