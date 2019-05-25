@@ -4,6 +4,17 @@
 {% if current_user.is_anonymous %}
   {% include 'main/_welcome.html.j2' %}
 {% else %}
-Nothing here yet, sorry :(
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+      {% with top_level_visible = True %}
+      {% for post in posts %}
+        {% if not post.parent_id %}
+        <p>{% include "main/_post.html.j2" %}</p>
+        {% endif %}
+      {% endfor %}
+      {% endwith %}
+    </div>
+  </div>
 {% endif %}
 {% endblock app_content %}

@@ -22,7 +22,18 @@ def before_request():
 @bp.route('/')
 @bp.route('/index')
 def index():
-    return render_template('main/index.html.j2', title='PiBoard')
+
+    if current_user.is_authenticated:
+        posts = Post.query.order_by(Post.timestamp.desc())
+        return render_template(
+            'main/index.html.j2',
+            title=f'PiBoard ({current_user.displayed_name or current_user.handle})',
+            posts=posts
+        )
+    return render_template(
+        'main/index.html.j2',
+        title='PiBoard'
+    )
 
 @bp.route('/post/<post_id>', methods=['GET', 'POST'])
 @login_required

@@ -2,21 +2,29 @@
   font-family: inconsolata, monospace;
 }
 
-img {
+/*
+ {
   max-width: 100%;
   max-height: auto;
 }
-
-/*
-.profile_pic {
-  height: 10px;
+*/
+.profile_pic img {
+  height: auto;
   width: 100%;
 }
-*/
+
+hr {
+  margin: 3px;
+  width: 100%;
+}
+
+.avatar_pic {
+  margin: 0;
+}
 
 .avatar_pic img {
-  max-height: 100%;
-  max-width: auto;
+  max-height: auto;
+  max-width: 4em;
 }
 
 #body.form-control {
@@ -25,15 +33,26 @@ img {
 }
 
 .post {
-  border-style: solid;
-  border-width: thin;
-  padding: 1em;
-
-  border-radius: 3px;
+  border-top-style: solid;
+  border-top-left-radius: 3px;
+/*  border-bottom-style: solid;
+  border-bottom-left-radius: 3px; */
+  border-left-style: solid;
   border-color: silver;
+
+  border-right-style: solid;
+  border-right-color: transparent; 
+  border-width: thin;
+  width: 100%;
+  padding-right: 1em;
+  background-color: white;
 }
 
 .post > div {
   margin-left: 0.1em;
   padding-left: 0.1em;
+}
+
+.answer-row {
+  margin-bottom: -1em !important;
 }

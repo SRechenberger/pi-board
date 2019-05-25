@@ -1,11 +1,13 @@
 <div class="post">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-1">
       <div class="avatar_pic">
-        <img src="{{ image_url(post.author.profile_pic) }}">
+        <a href="{{ url_for('main.profile', handle=post.author.handle) }}">
+          <img src="{{ image_url(post.author.profile_pic) }}">
+        </a>
       </div>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-11">
       <div class="row">
         <div class="col-md-6">
           {% if post.author.displayed_name %}
@@ -30,30 +32,33 @@
       </div>
     </div>
   </div>
-    <div class="row">
-      <div class="col-md-12">
-        <a href="{{ url_for('main.post', handle=post.author.handle, post_id=post.id) }}">
-          Answer
-        </a>
-        {% if post.comment_to and not top_level_visible %}
-        <a href="{{ url_for('main.post', handle=post.comment_to.author.handle, post_id=post.comment_to.id)}}">
-          Parent
-        </a>
-        {% endif %}
-        {% if post.author.handle == current_user.handle %}
-        <a href="{{ url_for('main.edit_post', post_id=post.id) }}">
-          Edit
-        </a>
-        {% endif %}
-      </div>
+  <!--hr-->
+  <div class="row">
+    <div class="col-md-1">
     </div>
-    <div class="row">
-      <div class="col">
-        {% if post.comments %}
-            {% for post in post.comments %}
-              <p>{% include "main/_post.html.j2" %}</p>
-            {% endfor %}
-        {% endif %}
-      </div>
+    <div class="col-md-11">
+      <a href="{{ url_for('main.post', handle=post.author.handle, post_id=post.id) }}">
+        Answer
+      </a>
+      {% if post.comment_to and not top_level_visible %}
+      <a href="{{ url_for('main.post', handle=post.comment_to.author.handle, post_id=post.comment_to.id)}}">
+        Parent
+      </a>
+      {% endif %}
+      {% if post.author.handle == current_user.handle %}
+      <a href="{{ url_for('main.edit_post', post_id=post.id) }}">
+        Edit
+      </a>
+      {% endif %}
     </div>
+  </div>
+  <div class="answer-row row">
+    <div class="col">
+      {% if post.comments %}
+          {% for post in post.comments %}
+            <p>{% include "main/_post.html.j2" %}</p>
+          {% endfor %}
+      {% endif %}
+    </div>
+  </div>
 </div>
