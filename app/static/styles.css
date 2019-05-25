@@ -56,3 +56,7 @@ hr {
   margin-left: 0.1em;
   padding-left: 0.1em;
 }
+
+#post-separator {
+  margin-bottom: 2em;
+}
