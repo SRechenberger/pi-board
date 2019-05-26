@@ -38,7 +38,7 @@
     </div>
     <div class="col-md-11">
       <a href="{{ url_for('main.post', handle=post.author.handle, post_id=post.id) }}">
-        Answer
+        Show
       </a>
       {% if post.comment_to and not top_level_visible %}
       <a href="{{ url_for('main.post', handle=post.comment_to.author.handle, post_id=post.comment_to.id)}}">
@@ -53,12 +53,27 @@
     </div>
   </div>
   <div class="answer-row row">
-    <div class="col">
+    <div class="col-md-1"></div>
+    <div class="col-md-11">
+    {% if show_answers and depth < 4 %}
       {% if post.comments %}
+        {% with depth = depth + 1 %}
           {% for post in post.comments %}
             <p>{% include "main/_post.html.j2" %}</p>
           {% endfor %}
+        {% endwith %}
       {% endif %}
+    {% else %}
+      {% with answers = len(post.comments) %}
+      {% if answers == 0 %}
+        No answers
+      {% elif answers == 1 %}
+        1 answer
+      {% else %}
+        {{ answers }} answers
+      {% endif %}
+      {% endwith %}
+    {% endif %}
     </div>
   </div>
 </div>

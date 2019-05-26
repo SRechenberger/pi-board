@@ -6,7 +6,7 @@
       {{ wtf.quick_form(comment_form) }}
     </div>
   </div>
-  {% with top_level_visible = not post.comment_to %}
+  {% with top_level_visible = not post.comment_to, show_answers = True, depth = 0 %}
   <div class="row">
     <div class="col-md-12">
       <p>{% include 'main/_post.html.j2' %}</p>

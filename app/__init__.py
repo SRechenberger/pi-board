@@ -46,6 +46,7 @@ def create_app(config_class=Config):
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
     app.jinja_env.globals.update(image_url=images.url)
+    app.jinja_env.globals.update(len=len)
 
     return app
 

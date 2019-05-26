@@ -10,7 +10,7 @@
   {% endif %}
   <div class="row">
     <div class="col-md-12">
-      {% with top_level_visible = True %}
+      {% with top_level_visible = True, show_answers = False, depth = 0 %}
       {% for post in posts %}
         {% if not post.parent_id %}
         <p>{% include "main/_post.html.j2" %}</p>
