@@ -164,9 +164,6 @@ def edit_profile(handle):
             except:
                 pass
 
-            db.session.commit()
-            return redirect(url_for('main.profile', handle=handle))
-
         new_displayed_name = form.displayed_name.data \
             if form.displayed_name.data else None
         if new_displayed_name != user.displayed_name:
