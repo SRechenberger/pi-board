@@ -47,6 +47,7 @@ def create_app(config_class=Config):
 
     app.jinja_env.globals.update(image_url=images.url)
     app.jinja_env.globals.update(len=len)
+    app.jinja_env.globals.update(MAX_DEPTH=app.config['MAX_DEPTH'])
 
     return app
 
