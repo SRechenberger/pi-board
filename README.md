@@ -1,4 +1,4 @@
-# pi-board (version 0.17.0)
+# pi-board (version 0.17.1)
 Simple reddit clone for small intranet purposes.
 
 # Progress

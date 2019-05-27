@@ -2,12 +2,7 @@
   font-family: inconsolata, monospace;
 }
 
-/*
- {
-  max-width: 100%;
-  max-height: auto;
-}
-*/
+
 .profile_pic img {
   height: auto;
   width: 100%;
@@ -18,7 +13,14 @@ hr {
   /* width: 100%; */
 }
 
-.avatar_pic img {
+.post-main,
+.post-nav,
+.post-avatar,
+.post-answers {
+  padding: 3px;
+}
+
+.post-avatar img {
   max-height: auto;
   max-width: 100%;
   /* margin-left: -10px; */
@@ -30,21 +32,11 @@ hr {
 }
 
 .post {
-  /*
-  border-top-style: solid;
-  border-top-left-radius: 3px;
-  border-bottom-style: solid;
-  border-bottom-left-radius: 3px;
-  border-color: silver;
-  border-width: thin;
-*/
   border-left-style: dotted;
   border-left-color: silver;
   border-width: thin;
   border-right-style: solid;
   border-right-color: transparent;
-  border-top-style: solid;
-
 
   width: 100%;
   padding-right: 0em;
@@ -53,11 +45,16 @@ hr {
   margin-top: 1em;
 }
 
-.post > div {
-  /* padding-top: 0em; */
-  margin-left: 0.1em;
-  padding-left: 1em;
+.main-row,
+.answer-row,
+.nav-row {
+  border-top-style: dotted;
+  border-top-width: thin;
+  border-top-color: silver;
+  margin-left: 0;
+  padding-left: 0;
 }
+
 
 #post-separator {
   margin-bottom: 2em;
