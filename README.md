@@ -1,2 +1,5 @@
-# pi-board version 0.17.0
+# pi-board (version 0.17.0)
 simple reddit clone for small intranet purposes
+
+# Versioning
+See [https://semver.org/](https://semver.org/)
