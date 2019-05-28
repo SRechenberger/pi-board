@@ -2,18 +2,26 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block navbar %}
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    PiBoard
-    <a href="{{ url_for('main.index') }}">Home</a>
-    {% if current_user.is_anonymous %}
-    <a href="{{ url_for('auth.login') }}">Login</a>
-    {% else %}
-    <a href="{{ url_for('main.profile', handle=current_user.handle )}}">Profile</a>
-    <a href="{{ url_for('auth.logout') }}">Logout</a>
-    {% endif %}
-  </div>
-</nav>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-11">
+          PiBoard
+          <a href="{{ url_for('main.index') }}">Home</a>
+          {% if current_user.is_anonymous %}
+          <a href="{{ url_for('auth.login') }}">Login</a>
+          {% else %}
+          <a href="{{ url_for('main.profile', handle=current_user.handle )}}">Profile</a>
+          <a href="{{ url_for('auth.logout') }}">Logout</a>
+          {% endif %}
+        </div>
+        <div class="col-md-1" align="right">
+          Version {{ VERSION }}
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
 {% endblock navbar %}
 
 {% block styles %}
