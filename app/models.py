@@ -50,8 +50,9 @@ class Post(db.Model):
         'Post',
         backref=db.backref(
             'comment_to',
-            remote_side=id
-        )
+            remote_side=id,
+        ),
+        cascade='delete'
     )
 
     def __repr__(self):

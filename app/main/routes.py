@@ -35,6 +35,20 @@ def index():
         title='PiBoard'
     )
 
+@bp.route('/post/delete/<post_id>', methods=['GET'])
+@login_required
+def delete_post(post_id):
+    to_delete = Post.query.filter_by(id=post_id).first_or_404()
+    if current_user.handle != to_delete.author.handle:
+        flash('You cannot delete other peoples posts.')
+        return redirect(url_for('main.index'))
+
+    Post.query.filter_by(id=post_id).delete()
+    db.session.commit()
+    flash('Post deleted.')
+    return redirect(url_for('main.index'))
+
+
 @bp.route('/post/<post_id>', methods=['GET', 'POST'])
 @login_required
 def edit_post(post_id):

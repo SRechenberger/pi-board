@@ -1,0 +1,17 @@
+<div class="modal fade" id="delete-post-{{ post.id }}" tabindex="-1"
+     role="dialog" aria-labelledby="delete-post-{{ post.id }}-label" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" align="center" id="delete-post-{{ post.id }}-label">Are you sure?</h5>
+      </div>
+      <div class="modal-body">
+        Do you really want to delete this post?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-xs btn-secondary" data-dismiss="modal">No</button>
+        <a href="{{ url_for('main.delete_post', post_id=post.id) }}" class="btn btn-xs btn-danger">Yes</a>
+      </div>
+    </div>
+  </div>
+</div>
