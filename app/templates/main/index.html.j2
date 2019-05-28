@@ -5,8 +5,10 @@
   {% include 'main/_welcome.html.j2' %}
 {% else %}
   <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-9">
+    <div class="col-xs-3 col-md-2" align="center">
+      <img src="https://i.stack.imgur.com/W08Uq.png" style="width=100%; max-width: 100%">
+    </div>
+    <div class="col-xs-9 col-md-10">
       {% with top_level_visible = True, show_answers = False, depth = 0 %}
       {% for post in posts %}
         {% if not post.parent_id %}

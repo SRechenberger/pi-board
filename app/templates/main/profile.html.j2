@@ -2,7 +2,7 @@
 
 {% block app_content %}
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-2">
     {% if user.profile_pic %}
     <div class="profile_pic">
       <img src="{{ image_url(user.profile_pic) }}">
@@ -31,7 +31,7 @@
     <a href="{{ url_for('main.edit_profile', handle=user.handle) }}">Edit Profile</a>
     {% endif %}
   </div>
-  <div class="col-md-9">
+  <div class="col-md-10">
     {% block profile_content %}
     {% endblock profile_content %}
   </div>
