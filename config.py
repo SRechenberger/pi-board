@@ -2,7 +2,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
-    VERSION = "0.17.1"
+    VERSION = "0.18.0"
 
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-neve-guess'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
